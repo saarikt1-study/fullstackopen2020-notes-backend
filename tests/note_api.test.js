@@ -7,12 +7,7 @@ const Note = require('../models/note')
 
 beforeEach(async () => {
   await Note.deleteMany({})
-
-  let noteObject = new Note(helper.initialNotes[0])
-  await noteObject.save()
-
-  noteObject = new Note(helper.initialNotes[1])
-  await noteObject.save()
+  await Note.insertMany(helper.initialNotes)
 })
 
 test('notes are returned as json', async () => {
@@ -86,7 +81,7 @@ test('a specific note can be viewed', async () => {
 
   console.log('Result: ', resultNote.body)
   console.log('NoteToView: ', noteToView)
-  expect(resultNote.body.toEqual(noteToView)
+  expect(resultNote.body.toEqual(noteToView))
 })
 
 test('a note can be deleted', async () => {
